@@ -23,18 +23,25 @@ O notebook fica em [`notebooks/ucs_vs_bfs_transporte.ipynb`](notebooks/ucs_vs_bf
 - Grafo não-direcionado com 16 paradas e 23 trechos (ônibus, trem e caminhada), representado como lista de adjacência.
 - Funções de custo: `custo_tempo`, `custo_tarifa`, `custo_generalizado` (tempo + 6 min × tarifa) e `custo_unitario`.
 - Desenho do grafo com posições que aproximam a geografia da cidade e destaque das rotas encontradas.
+- A mesma rede "vista" pela BFS (todo trecho vale 1) e pela UCS (cada trecho vale seus minutos).
 
 **Parte 4: implementação**
 - BFS com `collections.deque` e teste de objetivo na geração.
 - UCS com `heapq`, contador de desempate, *lazy deletion* e teste de objetivo na expansão. Ela recebe a função de custo como parâmetro.
 - Verificação de corretude da UCS contra `networkx.dijkstra_path_length` em todos os pares de paradas.
+- **Visualizações da execução:**
+  - fluxogramas lado a lado com as duas diferenças entre os algoritmos;
+  - painéis **passo a passo** no mapa, com o estado de cada nó e a árvore de busca;
+  - conteúdo da **fila × heap** a cada passo, incluindo as entradas obsoletas da *lazy deletion*;
+  - itinerários das rotas e "ondas" de busca (camadas de trechos × isócronas).
 
 **Parte 5: análise e comparação**
 - Cinco viagens comparadas em tempo, tarifa, custo generalizado e baldeações.
-- Quanto a BFS perde em relação ao ótimo de cada critério.
+- Quanto a BFS perde em relação ao ótimo de cada critério, com um mapa de calor para todos os 240 pares de paradas.
+- Espaço de todas as rotas possíveis (tempo × tarifa) com a fronteira de Pareto.
 - Prova prática de que a UCS com custo unitário encontra o mesmo número de trechos que a BFS.
 - Custo computacional: nós expandidos, gerados, pico da fronteira e tempo de execução.
-- Experimento de escala em grades de 5×5 a 50×50 com pesos aleatórios.
+- Experimento de escala em grades de 5×5 a 50×50 com pesos aleatórios, e um mapa de como cada algoritmo explora a grade.
 - Quadro teórico e conclusões, incluindo o A\* como próximo passo.
 
 BFS e UCS são implementadas **do zero**. O `networkx` é usado só para desenhar o grafo e validar a UCS.
@@ -43,6 +50,8 @@ BFS e UCS são implementadas **do zero**. O `networkx` é usado só para desenha
 
 - A rota da BFS **não foi a mais rápida em nenhuma** das 5 viagens. Ela ficou em média **27%** acima do ótimo em tempo, chegando a **54%**.
 - Em tarifa, a BFS chegou a custar **R$ 20,00** onde a rota ótima custa **R$ 5,50** (UFPB → Cabedelo).
+- Em 4 das 5 viagens, a rota da BFS é **dominada**: existe outra mais rápida **e** mais barata ao mesmo tempo.
+- Nos 240 pares da rede, a BFS acerta a rota mais rápida em 57% dos casos. Quando erra, pode levar até **106%** a mais de tempo.
 - Nas grades aleatórias, a BFS não encontrou a rota mais rápida em **87%** dos 140 casos. O excesso médio cresce com o tamanho do grafo: cerca de 36% na grade 5×5 e 73% na 50×50.
 - Os dois algoritmos expandem uma quantidade parecida de nós. A UCS é cerca de **2 a 3 vezes mais lenta** por causa do custo do heap, um preço baixo por rotas corretas.
 
