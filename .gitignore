@@ -1,0 +1,12 @@
+# Ambiente virtual local
+.venv/
+
+# Artefatos do Jupyter
+.ipynb_checkpoints/
+
+# Cache do Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

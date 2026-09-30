@@ -1,0 +1,9 @@
+# Análise e visualização
+pandas>=2.2
+matplotlib>=3.8
+# Usado só para desenhar o grafo e validar a UCS (BFS e UCS são implementadas do zero)
+networkx>=3.2
+
+# Execução do notebook
+ipykernel>=6.29
+nbconvert>=7.16
