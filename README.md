@@ -17,7 +17,9 @@ A **BFS** minimiza o **número de trechos** e ignora os custos. A **UCS** minimi
 
 ## Conteúdo do notebook
 
-O notebook fica em [`notebooks/ucs_vs_bfs_transporte.ipynb`](notebooks/ucs_vs_bfs_transporte.ipynb) e já está salvo com as saídas, então dá para ler direto no GitHub.
+O notebook completo fica em [`notebooks/ucs_vs_bfs_transporte.ipynb`](notebooks/ucs_vs_bfs_transporte.ipynb) e já está salvo com as saídas, então dá para ler direto no GitHub.
+
+Para uma apresentação curta (~10 minutos), há também a **versão resumida** [`notebooks/ucs_vs_bfs_apresentacao.ipynb`](notebooks/ucs_vs_bfs_apresentacao.ipynb). Ela explica brevemente cada algoritmo, aplica os dois em três percursos (UFPB → Tambaú, Valentina → Bayeux e Mangabeira → Bessa), mostra o mapa e o itinerário de cada um e compara os resultados no final.
 
 **Modelagem**
 - Grafo não-direcionado com 16 paradas e 23 trechos (ônibus, trem e caminhada), representado como lista de adjacência.
@@ -66,6 +68,7 @@ pip install -r requirements.txt
 
 # Reexecuta o notebook inteiro e salva as saídas no próprio arquivo
 jupyter nbconvert --to notebook --execute --inplace notebooks/ucs_vs_bfs_transporte.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/ucs_vs_bfs_apresentacao.ipynb
 ```
 
 Para abrir e editar o notebook de forma interativa, use o VS Code com a extensão Jupyter ou instale o JupyterLab (`pip install jupyterlab` e depois `jupyter lab`).
@@ -77,7 +80,8 @@ A execução completa leva cerca de 15 segundos. Todos os resultados são reprod
 ```
 .
 ├── notebooks/
-│   └── ucs_vs_bfs_transporte.ipynb   # partes 4 e 5 da apresentação
+│   ├── ucs_vs_bfs_transporte.ipynb   # partes 4 e 5 da apresentação (versão completa)
+│   └── ucs_vs_bfs_apresentacao.ipynb # versão resumida (~10 min)
 ├── requirements.txt                  # pandas, matplotlib, networkx, ipykernel, nbconvert
 └── README.md
 ```
